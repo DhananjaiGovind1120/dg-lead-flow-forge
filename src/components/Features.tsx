@@ -1,43 +1,64 @@
 
 import { 
-  BrainCircuit, 
-  UserCheck, 
-  FilterX, 
-  BarChart, 
-  Sparkles, 
-  Workflow 
+  BrainCircuit,
+  Calendar,
+  FileText,
+  Users,
+  BarChart3,
+  Mail,
+  MessageSquare,
+  FileSearch,
+  Database,
+  Search,
+  ShoppingCart,
+  Briefcase
 } from "lucide-react";
 
 const featureItems = [
   {
-    icon: <BrainCircuit className="h-10 w-10 text-white" />,
-    title: "AI Lead Scoring",
-    description: "Automatically score and prioritize leads based on their likelihood to convert using advanced machine learning algorithms."
+    icon: <Mail className="h-10 w-10 text-white" />,
+    title: "Marketing Automation",
+    description: "Automate email campaigns, social media posting, content creation, and audience targeting with AI-powered precision."
   },
   {
-    icon: <UserCheck className="h-10 w-10 text-white" />,
-    title: "Ideal Customer Profiling",
-    description: "Create detailed buyer personas and let our AI find prospects that match your most successful customers."
+    icon: <ShoppingCart className="h-10 w-10 text-white" />,
+    title: "Sales Process Automation",
+    description: "Identify high-value leads, automate follow-ups, and create personalized sales messages that convert prospects into customers."
   },
   {
-    icon: <FilterX className="h-10 w-10 text-white" />,
-    title: "Smart Lead Filtering",
-    description: "Filter out low-quality leads before they enter your pipeline, ensuring your sales team focuses on high-potential prospects."
+    icon: <Users className="h-10 w-10 text-white" />,
+    title: "HR & Recruitment",
+    description: "Streamline candidate screening, automate interview scheduling, and use AI to match the best talent to your open positions."
   },
   {
-    icon: <BarChart className="h-10 w-10 text-white" />,
-    title: "Conversion Analytics",
-    description: "Get detailed analytics on your lead generation performance with actionable insights to optimize your conversion rates."
+    icon: <FileText className="h-10 w-10 text-white" />,
+    title: "Document Processing",
+    description: "Extract data from invoices, contracts, and forms automatically, reducing manual data entry and processing errors."
   },
   {
-    icon: <Sparkles className="h-10 w-10 text-white" />,
-    title: "Content Personalization",
-    description: "Generate personalized outreach content that resonates with each prospect, increasing engagement and response rates."
+    icon: <Calendar className="h-10 w-10 text-white" />,
+    title: "Administrative Tasks",
+    description: "Automate scheduling, meeting notes, task management, and other day-to-day operations that consume valuable time."
   },
   {
-    icon: <Workflow className="h-10 w-10 text-white" />,
-    title: "Automated Workflows",
-    description: "Set up intelligent workflows that nurture leads through your pipeline with minimal manual intervention."
+    icon: <Database className="h-10 w-10 text-white" />,
+    title: "Data Analysis",
+    description: "Transform raw data into actionable insights with automated analysis, reporting, and visualization tools."
+  },
+  {
+    icon: <MessageSquare className="h-10 w-10 text-white" />,
+    title: "Customer Support",
+    description: "Deploy AI chatbots and automated ticketing systems to handle customer queries efficiently while maintaining quality."
+  },
+  {
+    icon: <FileSearch className="h-10 w-10 text-white" />,
+    title: "Compliance & Reporting",
+    description: "Ensure regulatory compliance with automated monitoring, documentation, and reporting systems tailored to your industry."
+  },
+  {
+    icon: <BarChart3 className="h-10 w-10 text-white" />,
+    title: "Financial Operations",
+    description: "Streamline invoicing, payments, expense tracking, and financial forecasting with intelligent automation."
   }
 ];
 
@@ -47,10 +68,10 @@ const Features = () => {
       <div className="container px-4 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            AI-Powered <span className="gradient-text">Solutions</span> For Every Step
+            AI-Powered <span className="gradient-text">Solutions</span> For Every Department
           </h2>
           <p className="text-lg text-muted-foreground">
-            Our comprehensive suite of AI tools helps you generate, qualify, and convert leads more effectively than ever before.
+            Our comprehensive suite of automation tools helps streamline operations across your entire organization.
           </p>
         </div>
         

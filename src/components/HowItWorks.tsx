@@ -1,43 +1,43 @@
 
 import {
+  ClipboardCheck,
   Search,
-  Filter,
-  UserCog,
-  MessageSquareText,
-  LineChart,
-  CheckCircle
+  Code,
+  Bot,
+  Workflow,
+  LineChart
 } from "lucide-react";
 
 const steps = [
   {
+    icon: <ClipboardCheck className="h-8 w-8" />,
+    title: "Process Analysis",
+    description: "We analyze your current workflows to identify bottlenecks, inefficiencies, and tasks that can be automated with AI."
+  },
+  {
     icon: <Search className="h-8 w-8" />,
-    title: "Data Collection",
-    description: "Our AI scans multiple sources to identify potential leads matching your ideal customer profile."
+    title: "Solution Design",
+    description: "Our experts design custom AI solutions tailored to your specific business needs and integration requirements."
   },
   {
-    icon: <Filter className="h-8 w-8" />,
-    title: "Lead Enrichment",
-    description: "We enrich each lead with detailed information from various databases to create comprehensive profiles."
+    icon: <Code className="h-8 w-8" />,
+    title: "Implementation",
+    description: "We seamlessly integrate our AI tools with your existing systems while ensuring minimal disruption to operations."
   },
   {
-    icon: <UserCog className="h-8 w-8" />,
-    title: "AI Scoring",
-    description: "Our machine learning algorithms score each lead based on their likelihood to convert into a customer."
+    icon: <Bot className="h-8 w-8" />,
+    title: "AI Training",
+    description: "Your AI systems are trained using your business data to ensure they deliver relevant and accurate results."
   },
   {
-    icon: <MessageSquareText className="h-8 w-8" />,
-    title: "Personalized Outreach",
-    description: "Generate tailored messages that resonate with each prospect's specific needs and pain points."
+    icon: <Workflow className="h-8 w-8" />,
+    title: "Deployment & Adoption",
+    description: "We help your team transition to the new automated workflows with comprehensive training and support."
   },
   {
     icon: <LineChart className="h-8 w-8" />,
-    title: "Performance Analysis",
-    description: "Track detailed metrics and get AI-powered recommendations to optimize your conversion rates."
-  },
-  {
-    icon: <CheckCircle className="h-8 w-8" />,
     title: "Continuous Improvement",
-    description: "Our system learns from successful conversions to continuously improve lead quality and targeting."
+    description: "Our AI systems constantly learn and improve based on feedback and changing business requirements."
   }
 ];
 
@@ -50,7 +50,7 @@ const HowItWorks = () => {
             How Our <span className="gradient-text">AI Technology</span> Works
           </h2>
           <p className="text-lg text-muted-foreground">
-            Our seamless process transforms the way you generate and convert leads, making your sales pipeline more efficient.
+            Our proven methodology ensures successful implementation of AI automation across your organization.
           </p>
         </div>
         
