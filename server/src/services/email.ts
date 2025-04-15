@@ -1,25 +1,24 @@
 import sgMail from '@sendgrid/mail';
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Load environment variables
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 // Initialize SendGrid with your API key
-const apiKey = process.env.SENDGRID_API_KEY?.trim();
+const apiKey = process.env.SENDGRID_API_KEY;
 if (!apiKey) {
   console.error('SENDGRID_API_KEY is not set in environment variables');
-} else {
-  try {
-    sgMail.setApiKey(apiKey);
-  } catch (error) {
-    console.error('Error setting SendGrid API key:', error);
-  }
 }
 
-// Verified sender email from SendGrid
-const VERIFIED_SENDER = process.env.SENDGRID_VERIFIED_SENDER?.trim() || 'dhananjaigovind2000@gmail.com';
+sgMail.setApiKey(apiKey || '');
 
-export const sendDemoConfirmationEmail = async (to: string, name: string, date: Date) => {
+export const sendDemoConfirmationEmail = async (to: string, name: string, date: string | Date) => {
   if (!apiKey) {
     throw new Error('SendGrid API key is not configured');
   }
 
+  const dateObj = typeof date === 'string' ? new Date(date) : date;
   const formattedDate = new Intl.DateTimeFormat('en-US', {
     weekday: 'long',
     year: 'numeric',
@@ -28,11 +27,11 @@ export const sendDemoConfirmationEmail = async (to: string, name: string, date: 
     hour: '2-digit',
     minute: '2-digit',
     timeZoneName: 'short'
-  }).format(date);
+  }).format(dateObj);
 
   const msg = {
     to,
-    from: VERIFIED_SENDER,
+    from: 'dhananjaigovind2000@gmail.com', // Your verified sender
     subject: 'Demo Scheduled - DGsolutions',
     html: `
       <h1>Demo Confirmation</h1>
@@ -43,7 +42,7 @@ export const sendDemoConfirmationEmail = async (to: string, name: string, date: 
       <br>
       <p>Best regards,</p>
       <p>The DGsolutions Team</p>
-    `,
+    `
   };
 
   try {
@@ -54,7 +53,7 @@ export const sendDemoConfirmationEmail = async (to: string, name: string, date: 
     console.error('Error sending demo confirmation email:', {
       error: error.message,
       code: error.code,
-      response: error.response?.body,
+      response: error.response,
     });
     throw error;
   }
@@ -65,6 +64,7 @@ export const sendAdminNotificationEmail = async (demoDetails: any) => {
     throw new Error('SendGrid API key is not configured');
   }
 
+  const dateObj = typeof demoDetails.date === 'string' ? new Date(demoDetails.date) : demoDetails.date;
   const formattedDate = new Intl.DateTimeFormat('en-US', {
     weekday: 'long',
     year: 'numeric',
@@ -73,11 +73,11 @@ export const sendAdminNotificationEmail = async (demoDetails: any) => {
     hour: '2-digit',
     minute: '2-digit',
     timeZoneName: 'short'
-  }).format(demoDetails.date);
+  }).format(dateObj);
 
   const msg = {
     to: 'dhananjaigovind2000@gmail.com', // Admin email
-    from: VERIFIED_SENDER,
+    from: 'dhananjaigovind2000@gmail.com', // Your verified sender
     subject: 'New Demo Scheduled',
     html: `
       <h1>New Demo Scheduled</h1>
@@ -90,7 +90,7 @@ export const sendAdminNotificationEmail = async (demoDetails: any) => {
         <li>Date: ${formattedDate}</li>
         <li>Message: ${demoDetails.message || 'No message provided'}</li>
       </ul>
-    `,
+    `
   };
 
   try {
@@ -101,8 +101,8 @@ export const sendAdminNotificationEmail = async (demoDetails: any) => {
     console.error('Error sending admin notification email:', {
       error: error.message,
       code: error.code,
-      response: error.response?.body,
+      response: error.response,
     });
     throw error;
   }
-}; 
+};

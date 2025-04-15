@@ -1,11 +1,22 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import { Demo } from './models/Demo';
+import { createClient } from '@supabase/supabase-js';
 import { sendDemoConfirmationEmail, sendAdminNotificationEmail } from './services/email';
 import { createCalendarEvent } from './services/calendar';
 import path from 'path';
+
+// Define types
+interface Demo {
+  id: string;
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  date: string;
+  status: string;
+  created_at: string;
+}
 
 // Load environment variables with explicit path
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
@@ -13,37 +24,26 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 // Debug environment variables
 console.log('Environment Variables:');
 console.log('PORT:', process.env.PORT);
-console.log('MONGODB_URI:', process.env.MONGODB_URI ? 'Set' : 'Not Set');
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL ? 'Set' : 'Not Set');
 console.log('SENDGRID_API_KEY:', process.env.SENDGRID_API_KEY ? 'Set' : 'Not Set');
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-// MongoDB connection
-const connectDB = async () => {
-  try {
-    const mongoURI = process.env.MONGODB_URI;
-    if (!mongoURI) {
-      throw new Error('MongoDB URI is not defined in environment variables');
-    }
-    
-    await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-      socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
-    });
-    console.log('Connected to MongoDB successfully');
-  } catch (err) {
-    console.error('MongoDB connection error:', err);
-    process.exit(1); // Exit if we can't connect to the database
-  }
-};
+// Initialize Supabase client
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
-// Connect to MongoDB
-connectDB();
+if (!supabaseUrl || !supabaseKey) {
+  console.error('Supabase credentials are not defined in environment variables');
+  process.exit(1);
+}
+
+const supabase = createClient<{ demos: Demo }>(supabaseUrl, supabaseKey);
 
 // CORS configuration
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'http://192.168.0.54:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -62,57 +62,58 @@ app.post('/api/schedule-demo', async (req: Request, res: Response) => {
     
     if (missingFields.length > 0) {
       return res.status(400).json({
-        success: false,
-        message: `Missing required fields: ${missingFields.join(', ')}`
+        error: 'Missing required fields',
+        missingFields
       });
     }
 
-    // Create calendar event
-    const calendarEventId = await createCalendarEvent(demoData);
+    // Insert demo request into Supabase
+    const { data, error } = await supabase
+      .from('demos')
+      .insert([{
+        name: demoData.name,
+        email: demoData.email,
+        company: demoData.company,
+        phone: demoData.phone,
+        date: demoData.date,
+        status: 'pending'
+      }])
+      .select();
 
-    // Save to database
-    const demo = new Demo({
-      ...demoData,
-      calendarEventId,
-      status: 'confirmed'
-    });
-    await demo.save();
+    if (error) {
+      console.error('Error inserting demo request:', error);
+      return res.status(500).json({ 
+        error: 'Failed to schedule demo',
+        details: error.message,
+        code: error.code
+      });
+    }
 
-    // Send confirmation emails
-    await Promise.all([
-      sendDemoConfirmationEmail(demoData.email, demoData.name, new Date(demoData.date)),
-      sendAdminNotificationEmail(demoData)
-    ]);
-    
-    res.json({ 
-      success: true,
-      message: 'Demo scheduled successfully',
-      data: demo
-    });
+    // Send confirmation email
+    try {
+      await sendDemoConfirmationEmail(demoData.email, demoData.name, demoData.date);
+      await sendAdminNotificationEmail(demoData);
+      await createCalendarEvent(demoData);
+
+      res.status(200).json({
+        message: 'Demo scheduled successfully',
+        demo: data?.[0] || demoData
+      });
+    } catch (error: any) {
+      console.error('Error in post-insert operations:', error);
+      // Still return success since the demo was scheduled
+      res.status(200).json({
+        message: 'Demo scheduled, but there were some issues with notifications',
+        demo: data?.[0] || demoData
+      });
+    }
   } catch (error) {
     console.error('Error scheduling demo:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to schedule demo'
-    });
-  }
-});
-
-// Get all demos (for admin dashboard)
-app.get('/api/demos', async (req: Request, res: Response) => {
-  try {
-    const demos = await Demo.find().sort({ createdAt: -1 });
-    res.json({ success: true, data: demos });
-  } catch (error) {
-    console.error('Error fetching demos:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch demos'
-    });
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 }); 
