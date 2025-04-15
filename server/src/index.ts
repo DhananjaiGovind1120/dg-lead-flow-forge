@@ -18,6 +18,13 @@ interface Demo {
   created_at: string;
 }
 
+interface Lead {
+  id: string;
+  email: string;
+  created_at: string;
+  source: string;
+}
+
 // Load environment variables with explicit path
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
@@ -39,7 +46,7 @@ if (!supabaseUrl || !supabaseKey) {
   process.exit(1);
 }
 
-const supabase = createClient<{ demos: Demo }>(supabaseUrl, supabaseKey);
+const supabase = createClient<{ demos: Demo; leads: Lead }>(supabaseUrl, supabaseKey);
 
 // CORS configuration
 app.use(cors({
@@ -50,6 +57,56 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+// Get Started endpoint for capturing leads
+app.post('/api/capture-lead', async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+    
+    if (!email) {
+      return res.status(400).json({
+        error: 'Email is required'
+      });
+    }
+
+    // Insert lead into Supabase
+    const { data, error } = await supabase
+      .from('leads')
+      .insert([{
+        email,
+        source: 'get_started'
+      }])
+      .select();
+
+    if (error) {
+      console.error('Error capturing lead:', error);
+      return res.status(500).json({ 
+        error: 'Failed to capture lead',
+        details: error.message,
+        code: error.code
+      });
+    }
+
+    // Send notification to admin about new lead
+    try {
+      await sendAdminNotificationEmail({
+        email,
+        type: 'new_lead',
+        source: 'get_started'
+      });
+    } catch (error) {
+      console.error('Error sending admin notification:', error);
+    }
+
+    res.status(200).json({
+      message: 'Lead captured successfully',
+      lead: data?.[0]
+    });
+  } catch (error) {
+    console.error('Error capturing lead:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 // Demo scheduling endpoint
 app.post('/api/schedule-demo', async (req: Request, res: Response) => {

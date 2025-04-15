@@ -1,29 +1,36 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { captureLead } from "@/lib/api";
 
 const CTA = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      await captureLead({ email });
       toast({
         title: "Thanks for your interest!",
         description: "A member of our team will be in touch soon.",
         variant: "default",
       });
       setEmail("");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to submit email",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
