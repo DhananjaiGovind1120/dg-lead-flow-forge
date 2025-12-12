@@ -32,7 +32,7 @@ export const sendDemoConfirmationEmail = async (to: string, name: string, date: 
   const msg = {
     to,
     from: 'dhananjaigovind2000@gmail.com', // Your verified sender
-    subject: 'Demo Scheduled - DGsolutions',
+    subject: 'Demo Scheduled - DMS Solutions',
     html: `
       <h1>Demo Confirmation</h1>
       <p>Hi ${name},</p>
@@ -41,7 +41,7 @@ export const sendDemoConfirmationEmail = async (to: string, name: string, date: 
       <p>If you need to reschedule or have any questions, please don't hesitate to contact us.</p>
       <br>
       <p>Best regards,</p>
-      <p>The DGsolutions Team</p>
+      <p>The DMS Solutions Team</p>
     `
   };
 

@@ -14,10 +14,7 @@ const Navbar = () => {
     <nav className="py-4 md:py-6 fixed w-full top-0 z-50 bg-background/80 backdrop-blur-md">
       <div className="container px-4 mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <a href="#" className="text-2xl font-display font-bold">
-            <span className="text-dgblue-600">DG</span>
-            <span className="text-brand-600">solutions</span>
-          </a>
+          <a href="#" className="text-2xl font-display font-bold"><span className="text-dgblue-600">DMS</span><span className="text-brand-600"> Solutions</span></a>
         </div>
 
         {/* Desktop navigation */}

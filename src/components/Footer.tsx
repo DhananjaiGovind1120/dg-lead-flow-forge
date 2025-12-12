@@ -18,11 +18,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <div className="text-2xl font-display font-bold mb-5">
-              <span className="text-dgblue-500">DG</span>
-              <span className="text-brand-400">solutions</span>
+              <span className="text-dgblue-500">DMS</span>
+              <span className="text-brand-400"> Solutions</span>
             </div>
             <p className="text-slate-400 mb-6">
-              Transforming sales pipelines with AI-powered lead generation and qualification solutions.
+              Automation for the modern age – powered by DMS Solutions.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-slate-400 hover:text-white transition-colors">
