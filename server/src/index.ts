@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { createClient } from '@supabase/supabase-js';
 import { sendDemoConfirmationEmail, sendAdminNotificationEmail } from './services/email';
 import { createCalendarEvent } from './services/calendar';
 import path from 'path';
@@ -11,10 +12,24 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 // Debug environment variables
 console.log('Environment Variables:');
 console.log('PORT:', process.env.PORT);
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL ? 'Set' : 'Not Set');
 console.log('SENDGRID_API_KEY:', process.env.SENDGRID_API_KEY ? 'Set' : 'Not Set');
 
 const app = express();
 const port = process.env.PORT || 3001;
+
+// Server-side Supabase client. The service role key bypasses RLS, so it must never reach the browser.
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseServiceKey) {
+  console.error('SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set in server/.env');
+  process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+  auth: { persistSession: false },
+});
 
 // CORS configuration
 app.use(cors({
@@ -37,6 +52,21 @@ app.post('/api/capture-lead', async (req: Request, res: Response) => {
       });
     }
 
+    const { data, error } = await supabase
+      .from('leads')
+      .insert({ email, source: 'get_started' })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error capturing lead:', error);
+      return res.status(500).json({
+        error: 'Failed to capture lead',
+        details: error.message,
+        code: error.code
+      });
+    }
+
     // Send notification to admin about new lead
     try {
       await sendAdminNotificationEmail({
@@ -50,7 +80,7 @@ app.post('/api/capture-lead', async (req: Request, res: Response) => {
 
     res.status(200).json({
       message: 'Lead captured successfully',
-      lead: { email, source: 'get_started' }
+      lead: data
     });
   } catch (error) {
     console.error('Error capturing lead:', error);
@@ -74,6 +104,29 @@ app.post('/api/schedule-demo', async (req: Request, res: Response) => {
       });
     }
 
+    const { data, error } = await supabase
+      .from('demos')
+      .insert({
+        name: demoData.name,
+        email: demoData.email,
+        company: demoData.company,
+        phone: demoData.phone,
+        message: demoData.message || null,
+        meeting_at: new Date(demoData.date).toISOString(),
+        status: 'pending'
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error inserting demo request:', error);
+      return res.status(500).json({
+        error: 'Failed to schedule demo',
+        details: error.message,
+        code: error.code
+      });
+    }
+
     // Send confirmation email
     try {
       await sendDemoConfirmationEmail(demoData.email, demoData.name, demoData.date);
@@ -82,14 +135,14 @@ app.post('/api/schedule-demo', async (req: Request, res: Response) => {
 
       res.status(200).json({
         message: 'Demo scheduled successfully',
-        demo: { ...demoData, status: 'pending' }
+        demo: data
       });
     } catch (error: any) {
       console.error('Error in post-notification operations:', error);
       // Still return success since the demo request was received
       res.status(200).json({
         message: 'Demo scheduled, but there were some issues with notifications',
-        demo: { ...demoData, status: 'pending' }
+        demo: data
       });
     }
   } catch (error) {
