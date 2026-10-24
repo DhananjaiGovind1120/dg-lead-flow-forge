@@ -19,7 +19,7 @@ const Hero = () => {
 
   return (
     <>
-      <section className="pt-32 pb-20 bg-grid">
+      <section className="pt-32 pb-20 bg-grid overflow-hidden">
         <div className="container px-4 mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             <div className="w-full lg:w-1/2">
@@ -71,7 +71,7 @@ const Hero = () => {
                       <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     </div>
-                    <div className="mx-auto text-xs text-slate-500 dark:text-slate-400">
+                    <div className="flex-1 min-w-0 truncate pl-3 text-center text-xs text-slate-500 dark:text-slate-400">
                       Grace automations AI Process Automation Dashboard
                     </div>
                   </div>
