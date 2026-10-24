@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "DGsolutions has completely transformed our lead generation process. We've seen a 40% increase in qualified leads and our sales team is closing deals faster than ever.",
+    quote: "Grace automations has completely transformed our lead generation process. We've seen a 40% increase in qualified leads and our sales team is closing deals faster than ever.",
     author: "Sarah Johnson",
     position: "VP of Sales",
     company: "TechGrowth Inc.",

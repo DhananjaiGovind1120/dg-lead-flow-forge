@@ -18,11 +18,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <div className="text-2xl font-display font-bold mb-5">
-              <span className="text-dgblue-500">DMS</span>
-              <span className="text-brand-400"> Solutions</span>
+              <span className="text-dgblue-500">Grace</span>
+              <span className="text-brand-400"> automations</span>
             </div>
             <p className="text-slate-400 mb-6">
-              Automation for the modern age – powered by DMS Solutions.
+              Automation for the modern age – powered by Grace automations.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-slate-400 hover:text-white transition-colors">
@@ -88,7 +88,7 @@ const Footer = () => {
         <div className="border-t border-slate-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-slate-400 text-sm">
-              &copy; {currentYear} DGsolutions. All rights reserved.
+              &copy; {currentYear} Grace automations. All rights reserved.
             </p>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a href="#" className="text-slate-400 hover:text-white transition-colors text-sm">
