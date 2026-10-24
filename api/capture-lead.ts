@@ -1,6 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { supabase } from './_lib/supabase.js';
-import { sendAdminNotificationEmail } from './_lib/email.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -27,12 +26,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         details: error.message,
         code: error.code,
       });
-    }
-
-    try {
-      await sendAdminNotificationEmail({ email, type: 'new_lead', source: 'get_started' });
-    } catch (err) {
-      console.error('Error sending admin notification:', err);
     }
 
     return res.status(200).json({ message: 'Lead captured successfully', lead: data });

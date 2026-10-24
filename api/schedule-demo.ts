@@ -1,7 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { supabase } from './_lib/supabase.js';
-import { sendDemoConfirmationEmail, sendAdminNotificationEmail } from './_lib/email.js';
-import { createCalendarEvent } from './_lib/calendar.js';
 
 const requiredFields = ['name', 'email', 'company', 'phone', 'date'];
 
@@ -41,20 +39,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    try {
-      await sendDemoConfirmationEmail(demoData.email, demoData.name, demoData.date);
-      await sendAdminNotificationEmail(demoData);
-      await createCalendarEvent(demoData);
-
-      return res.status(200).json({ message: 'Demo scheduled successfully', demo: data });
-    } catch (err) {
-      console.error('Error in post-notification operations:', err);
-      // The demo was saved, so still report success
-      return res.status(200).json({
-        message: 'Demo scheduled, but there were some issues with notifications',
-        demo: data,
-      });
-    }
+    return res.status(200).json({ message: 'Demo scheduled successfully', demo: data });
   } catch (err) {
     console.error('Error scheduling demo:', err);
     return res.status(500).json({ error: 'Internal server error' });
