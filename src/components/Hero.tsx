@@ -72,7 +72,7 @@ const Hero = () => {
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     </div>
                     <div className="mx-auto text-xs text-slate-500 dark:text-slate-400">
-                      DGsolutions AI Process Automation Dashboard
+                      Grace automations AI Process Automation Dashboard
                     </div>
                   </div>
                 </div>
