@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+// Same-origin by default, so the Vercel serverless functions in /api are called directly
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? '';
 
 export interface DemoRequest {
   name: string;
