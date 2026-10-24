@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { 
   ChevronRight, 
@@ -13,6 +13,13 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import DemoScheduler from "./DemoScheduler";
+
+const workflowSteps = [
+  { title: "New lead captured", detail: "Trigger · Website form", tone: "bg-dgblue-600" },
+  { title: "AI qualifies lead", detail: "Score and classify automatically", tone: "bg-brand-600" },
+  { title: "Send follow-up email", detail: "Personalised reply in minutes", tone: "bg-dgblue-500" },
+  { title: "Update CRM and book demo", detail: "Synced across your tools", tone: "bg-brand-500" },
+];
 
 const Hero = () => {
   const [showDemoDialog, setShowDemoDialog] = useState(false);
@@ -72,62 +79,42 @@ const Hero = () => {
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     </div>
                     <div className="flex-1 min-w-0 truncate pl-3 text-center text-xs text-slate-500 dark:text-slate-400">
-                      Grace automations AI Process Automation Dashboard
+                      Grace automations Workflow Builder
                     </div>
                   </div>
                 </div>
                 <div className="p-6">
-                  <div className="flex flex-col gap-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
-                        <h3 className="text-sm font-medium mb-1">Automation Rate</h3>
-                        <div className="text-2xl font-bold text-dgblue-600">78%</div>
-                        <div className="mt-2 text-xs text-green-600 flex items-center">
-                          <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M12 7a1 1 0 10-2 0v4a1 1 0 102 0V7z" clipRule="evenodd" />
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12z" clipRule="evenodd" />
-                          </svg>
-                          Up 15% this month
+                  <div className="flex flex-col">
+                    {workflowSteps.map((step, index) => (
+                      <Fragment key={step.title}>
+                        <div className="flex items-center gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 p-3">
+                          <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${step.tone}`}>
+                            {index + 1}
+                          </div>
+                          <div className="min-w-0">
+                            <div className="truncate text-sm font-medium">{step.title}</div>
+                            <div className="truncate text-xs text-muted-foreground">{step.detail}</div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
-                        <h3 className="text-sm font-medium mb-1">Time Saved</h3>
-                        <div className="text-2xl font-bold text-brand-600">240h</div>
-                        <div className="mt-2 text-xs text-green-600 flex items-center">
-                          <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M12 7a1 1 0 10-2 0v4a1 1 0 102 0V7z" clipRule="evenodd" />
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12z" clipRule="evenodd" />
-                          </svg>
-                          Up 32% this month
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
-                      <div className="flex justify-between mb-2">
-                        <h3 className="text-sm font-medium">Department Efficiency</h3>
-                        <div className="text-xs text-slate-500">Last 30 days</div>
-                      </div>
-                      <div className="flex gap-1 h-8">
-                        <div className="w-1/4 bg-dgblue-600 rounded-l"></div>
-                        <div className="w-1/4 bg-dgblue-500"></div>
-                        <div className="w-1/5 bg-dgblue-400"></div>
-                        <div className="w-1/6 bg-dgblue-300 rounded-r"></div>
-                      </div>
-                      <div className="flex justify-between text-xs mt-2">
-                        <span>Marketing</span>
-                        <span>Sales</span>
-                        <span>HR</span>
-                        <span>Ops</span>
-                      </div>
-                    </div>
-                    <div className="flex gap-4 mt-2">
-                      <Button variant="default" size="sm" className="bg-gradient flex-1 hover:opacity-90">
-                        Process Analysis
-                      </Button>
-                      <Button variant="outline" size="sm" className="flex-1">
-                        Share Report
-                      </Button>
-                    </div>
+                        {index < workflowSteps.length - 1 && (
+                          <div className="flex justify-center py-1">
+                            <div className="h-5 w-px bg-slate-300 dark:bg-slate-600"></div>
+                          </div>
+                        )}
+                      </Fragment>
+                    ))}
+                  </div>
+                  <div className="mt-4 flex items-center text-xs text-muted-foreground">
+                    <span className="mr-1.5 h-2 w-2 rounded-full bg-green-500"></span>
+                    Workflow running
+                  </div>
+                  <div className="flex gap-4 mt-6">
+                    <Button variant="default" size="sm" className="bg-gradient flex-1 hover:opacity-90">
+                      Edit Workflow
+                    </Button>
+                    <Button variant="outline" size="sm" className="flex-1">
+                      View Runs
+                    </Button>
                   </div>
                 </div>
               </div>
