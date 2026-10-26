@@ -11,9 +11,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 interface DemoSchedulerProps {
   workflow?: string;
+  // Inside a dialog the dialog supplies the title and spacing
+  embedded?: boolean;
 }
 
-const DemoScheduler = ({ workflow }: DemoSchedulerProps) => {
+const DemoScheduler = ({ workflow, embedded = false }: DemoSchedulerProps) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -83,14 +85,22 @@ const DemoScheduler = ({ workflow }: DemoSchedulerProps) => {
   };
 
   return (
-    <section id="schedule-demo" className="py-20 bg-slate-50">
-      <div className="container px-4 mx-auto">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Schedule a Demo</h2>
-          <p className="text-slate-600">
-            Book a personalized demo to see how our solutions can transform your business.
+    <section id="schedule-demo" className={embedded ? "" : "py-20 bg-slate-50"}>
+      <div className={embedded ? "" : "container px-4 mx-auto"}>
+        {!embedded && (
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Schedule a Demo</h2>
+            <p className="text-slate-600">
+              Book a personalized demo to see how our solutions can transform your business.
+            </p>
+          </div>
+        )}
+
+        {workflow && (
+          <p className="mb-6 text-center text-sm text-muted-foreground">
+            Booking for: <span className="font-medium text-foreground">{workflow}</span>
           </p>
-        </div>
+        )}
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Calendar Section */}
@@ -129,12 +139,6 @@ const DemoScheduler = ({ workflow }: DemoSchedulerProps) => {
               </p>
             )}
           </div>
-
-          {workflow && (
-            <p className="text-sm text-muted-foreground">
-              Booking for: <span className="font-medium text-foreground">{workflow}</span>
-            </p>
-          )}
 
           {/* Contact Form */}
           <div className="bg-white p-6 rounded-lg shadow-sm">

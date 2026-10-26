@@ -81,11 +81,11 @@ const Hero = () => {
 
       {/* Demo Scheduling Dialog */}
       <Dialog open={showDemoDialog} onOpenChange={setShowDemoDialog}>
-        <DialogContent className="max-w-4xl">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Schedule a Demo</DialogTitle>
           </DialogHeader>
-          <DemoScheduler workflow={demoWorkflow ?? undefined} />
+          <DemoScheduler workflow={demoWorkflow ?? undefined} embedded />
         </DialogContent>
       </Dialog>
     </>
