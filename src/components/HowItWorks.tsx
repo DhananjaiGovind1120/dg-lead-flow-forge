@@ -1,4 +1,4 @@
-
+import { useEffect, useRef, useState } from "react";
 import {
   ClipboardCheck,
   Search,
@@ -41,6 +41,50 @@ const steps = [
   }
 ];
 
+const StepItem = ({ step, index }: { step: (typeof steps)[number]; index: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  // Fade the step in once it scrolls into view
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`flex flex-col items-center text-center transition-all duration-700 ease-out motion-reduce:transition-none ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8 motion-reduce:opacity-100 motion-reduce:translate-y-0"
+      }`}
+      style={{ transitionDelay: `${(index % 3) * 150}ms` }}
+    >
+      <div className="relative mb-6 flex h-20 w-20 items-center justify-center">
+        <span className="absolute inset-0 rounded-full bg-gradient motion-safe:animate-pulse-ring" />
+        <span className="relative flex h-20 w-20 items-center justify-center rounded-full bg-gradient text-white shadow-lg">
+          {step.icon}
+        </span>
+        <span className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-background text-xs font-bold text-brand-600 shadow ring-1 ring-brand-200">
+          {index + 1}
+        </span>
+      </div>
+      <h3 className="mb-2 text-xl font-semibold">{step.title}</h3>
+      <p className="max-w-sm text-muted-foreground">{step.description}</p>
+    </div>
+  );
+};
+
 const HowItWorks = () => {
   return (
     <section id="how-it-works" className="py-20">
@@ -53,27 +97,10 @@ const HowItWorks = () => {
             Our proven methodology ensures successful implementation of AI automation across your organization.
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16 justify-items-center">
           {steps.map((step, index) => (
-            <div key={index} className="relative">
-              <div className="bg-brand-50 dark:bg-brand-900/10 w-16 h-16 rounded-lg flex items-center justify-center mb-4 text-brand-600 relative">
-                {step.icon}
-                <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient rounded-full flex items-center justify-center text-white font-medium">
-                  {index + 1}
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-              <p className="text-muted-foreground">{step.description}</p>
-              
-              {index < steps.length - 1 && (index + 1) % 3 !== 0 && (
-                <div className="hidden lg:block absolute top-8 left-20 w-full h-0.5 bg-gradient-to-r from-brand-200 to-transparent"></div>
-              )}
-              
-              {index < steps.length - 3 && (
-                <div className="hidden lg:block absolute left-8 top-20 h-16 w-0.5 bg-gradient-to-b from-brand-200 to-transparent"></div>
-              )}
-            </div>
+            <StepItem key={step.title} step={step} index={index} />
           ))}
         </div>
       </div>

@@ -98,6 +98,10 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
+				'pulse-ring': {
+					'0%': { transform: 'scale(1)', opacity: '0.45' },
+					'100%': { transform: 'scale(1.7)', opacity: '0' }
+				},
 				'accordion-down': {
 					from: {
 						height: '0'
@@ -132,6 +136,7 @@ export default {
 				}
 			},
 			animation: {
+				'pulse-ring': 'pulse-ring 2.4s ease-out infinite',
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'float': 'float 6s ease-in-out infinite',
