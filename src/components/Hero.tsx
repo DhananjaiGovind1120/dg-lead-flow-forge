@@ -64,7 +64,7 @@ const Hero = () => {
             <div className="w-full lg:w-1/2 relative">
               <div className="absolute -top-10 -right-10 w-64 h-64 bg-brand-400/20 rounded-full filter blur-3xl"></div>
               <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-dgblue-400/20 rounded-full filter blur-3xl"></div>
-              <WorkflowAnimation />
+              <WorkflowAnimation onBookDemo={() => setShowDemoDialog(true)} />
             </div>
           </div>
         </div>
