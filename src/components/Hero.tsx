@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { 
   ChevronRight, 
@@ -13,13 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import DemoScheduler from "./DemoScheduler";
-
-const workflowSteps = [
-  { title: "New lead captured", detail: "Trigger · Website form", tone: "bg-dgblue-600" },
-  { title: "AI qualifies lead", detail: "Score and classify automatically", tone: "bg-brand-600" },
-  { title: "Send follow-up email", detail: "Personalised reply in minutes", tone: "bg-dgblue-500" },
-  { title: "Update CRM and book demo", detail: "Synced across your tools", tone: "bg-brand-500" },
-];
+import WorkflowAnimation from "./WorkflowAnimation";
 
 const Hero = () => {
   const [showDemoDialog, setShowDemoDialog] = useState(false);
@@ -70,54 +64,7 @@ const Hero = () => {
             <div className="w-full lg:w-1/2 relative">
               <div className="absolute -top-10 -right-10 w-64 h-64 bg-brand-400/20 rounded-full filter blur-3xl"></div>
               <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-dgblue-400/20 rounded-full filter blur-3xl"></div>
-              <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-lg overflow-hidden">
-                <div className="bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 p-4">
-                  <div className="flex items-center">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                      <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    </div>
-                    <div className="flex-1 min-w-0 truncate pl-3 text-center text-xs text-slate-500 dark:text-slate-400">
-                      Grace automations Workflow Builder
-                    </div>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex flex-col">
-                    {workflowSteps.map((step, index) => (
-                      <Fragment key={step.title}>
-                        <div className="flex items-center gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 p-3">
-                          <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${step.tone}`}>
-                            {index + 1}
-                          </div>
-                          <div className="min-w-0">
-                            <div className="truncate text-sm font-medium">{step.title}</div>
-                            <div className="truncate text-xs text-muted-foreground">{step.detail}</div>
-                          </div>
-                        </div>
-                        {index < workflowSteps.length - 1 && (
-                          <div className="flex justify-center py-1">
-                            <div className="h-5 w-px bg-slate-300 dark:bg-slate-600"></div>
-                          </div>
-                        )}
-                      </Fragment>
-                    ))}
-                  </div>
-                  <div className="mt-4 flex items-center text-xs text-muted-foreground">
-                    <span className="mr-1.5 h-2 w-2 rounded-full bg-green-500"></span>
-                    Workflow running
-                  </div>
-                  <div className="flex gap-4 mt-6">
-                    <Button variant="default" size="sm" className="bg-gradient flex-1 hover:opacity-90">
-                      Edit Workflow
-                    </Button>
-                    <Button variant="outline" size="sm" className="flex-1">
-                      View Runs
-                    </Button>
-                  </div>
-                </div>
-              </div>
+              <WorkflowAnimation />
             </div>
           </div>
         </div>
