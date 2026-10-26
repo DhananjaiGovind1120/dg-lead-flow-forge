@@ -24,6 +24,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         company: demoData.company,
         phone: demoData.phone,
         message: demoData.message || null,
+        workflow: demoData.workflow || null,
         meeting_at: new Date(demoData.date).toISOString(),
         status: 'pending',
       })

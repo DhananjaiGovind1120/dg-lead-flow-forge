@@ -17,6 +17,7 @@ import WorkflowAnimation from "./WorkflowAnimation";
 
 const Hero = () => {
   const [showDemoDialog, setShowDemoDialog] = useState(false);
+  const [demoWorkflow, setDemoWorkflow] = useState<string | null>(null);
 
   return (
     <>
@@ -40,7 +41,10 @@ const Hero = () => {
                 <Button 
                   size="lg" 
                   className="bg-gradient hover:opacity-90"
-                  onClick={() => setShowDemoDialog(true)}
+                  onClick={() => {
+                    setDemoWorkflow(null);
+                    setShowDemoDialog(true);
+                  }}
                 >
                   Schedule Demo
                   <ChevronRight size={18} className="ml-1" />
@@ -64,7 +68,12 @@ const Hero = () => {
             <div className="w-full lg:w-1/2 relative">
               <div className="absolute -top-10 -right-10 w-64 h-64 bg-brand-400/20 rounded-full filter blur-3xl"></div>
               <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-dgblue-400/20 rounded-full filter blur-3xl"></div>
-              <WorkflowAnimation onBookDemo={() => setShowDemoDialog(true)} />
+              <WorkflowAnimation
+                onBookDemo={(workflowTitle) => {
+                  setDemoWorkflow(workflowTitle);
+                  setShowDemoDialog(true);
+                }}
+              />
             </div>
           </div>
         </div>
@@ -76,7 +85,7 @@ const Hero = () => {
           <DialogHeader>
             <DialogTitle>Schedule a Demo</DialogTitle>
           </DialogHeader>
-          <DemoScheduler />
+          <DemoScheduler workflow={demoWorkflow ?? undefined} />
         </DialogContent>
       </Dialog>
     </>

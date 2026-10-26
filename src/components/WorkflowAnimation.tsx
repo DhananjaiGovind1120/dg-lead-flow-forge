@@ -8,7 +8,7 @@ const NODE_X = 60;
 const NODE_R = 30;
 
 interface WorkflowAnimationProps {
-  onBookDemo?: () => void;
+  onBookDemo?: (workflowTitle: string) => void;
 }
 
 const WorkflowAnimation = ({ onBookDemo }: WorkflowAnimationProps) => {
@@ -120,7 +120,7 @@ const WorkflowAnimation = ({ onBookDemo }: WorkflowAnimationProps) => {
 
       {onBookDemo && (
         <div className="mt-6 flex justify-center">
-          <Button size="lg" className="bg-gradient hover:opacity-90" onClick={onBookDemo}>
+          <Button size="lg" className="bg-gradient hover:opacity-90" onClick={() => onBookDemo(workflow.title)}>
             Book a demo for this workflow
           </Button>
         </div>

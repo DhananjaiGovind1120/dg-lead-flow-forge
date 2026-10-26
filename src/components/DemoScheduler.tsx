@@ -9,7 +9,11 @@ import { scheduleDemo } from "@/lib/api";
 import { useToast } from "@/components/ui/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const DemoScheduler = () => {
+interface DemoSchedulerProps {
+  workflow?: string;
+}
+
+const DemoScheduler = ({ workflow }: DemoSchedulerProps) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -47,7 +51,7 @@ const DemoScheduler = () => {
 
     setIsLoading(true);
     try {
-      await scheduleDemo({ ...formData, date: scheduledDate });
+      await scheduleDemo({ ...formData, date: scheduledDate, workflow });
       toast({
         title: "Success",
         description: "Your demo has been scheduled successfully!",
@@ -125,6 +129,12 @@ const DemoScheduler = () => {
               </p>
             )}
           </div>
+
+          {workflow && (
+            <p className="text-sm text-muted-foreground">
+              Booking for: <span className="font-medium text-foreground">{workflow}</span>
+            </p>
+          )}
 
           {/* Contact Form */}
           <div className="bg-white p-6 rounded-lg shadow-sm">

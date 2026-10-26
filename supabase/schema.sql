@@ -14,6 +14,7 @@ create table if not exists public.demos (
   company text not null,
   phone text not null,
   message text,
+  workflow text,
   meeting_at timestamptz not null,
   status text not null default 'pending'
     check (status in ('pending', 'confirmed', 'cancelled')),
