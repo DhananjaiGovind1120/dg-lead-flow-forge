@@ -35,7 +35,7 @@ const Hero = () => {
                 With AI
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-8">
-                Streamline operations, enhance productivity, and reduce costs with our comprehensive suite of AI automation solutions for your entire business.
+                We build and run the digital back-office for small businesses: enquiries, bookings, invoices, and WhatsApp follow-up, set up for you in about three weeks, with a real person to call when something needs changing.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Button 
