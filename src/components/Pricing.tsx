@@ -13,12 +13,12 @@ const Pricing = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-center">
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-md p-8">
             <h3 className="text-lg font-semibold mb-2">Setup</h3>
-            <p className="text-3xl font-display font-bold mb-3">from ₹[X]</p>
+            <p className="text-3xl font-display font-bold mb-3">from ₹15,000</p>
             <p className="text-muted-foreground">Depending on how many tasks we automate.</p>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-md p-8">
             <h3 className="text-lg font-semibold mb-2">Monthly care</h3>
-            <p className="text-3xl font-display font-bold mb-3">from ₹[Y]/month</p>
+            <p className="text-3xl font-display font-bold mb-3">from ₹25,000/month</p>
             <p className="text-muted-foreground">Covers monitoring, fixes, updates and a monthly review call.</p>
           </div>
         </div>
