@@ -17,7 +17,7 @@ const steps = [
   {
     icon: <Rocket className="h-8 w-8" />,
     week: "Week 3",
-    title: "Go live, train your team",
+    title: "Go live and train your team",
     description: "We switch everything on, train your team, and stay on call while you settle in.",
   },
 ];

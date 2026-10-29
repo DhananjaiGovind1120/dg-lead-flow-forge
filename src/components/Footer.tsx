@@ -22,7 +22,7 @@ const Footer = () => {
               <span className="text-brand-400"> automations</span>
             </div>
             <p className="text-slate-400 mb-6">
-              Automation for the modern age – powered by Grace automations.
+              Based in London, working with businesses across India.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-slate-400 hover:text-white transition-colors">

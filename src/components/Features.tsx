@@ -8,10 +8,10 @@ const Features = () => {
       <div className="container px-4 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            What we <span className="gradient-text">set up</span> for you
+            What we <span className="gradient-text">take off your plate</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Pick what you need. We set up the ones that save your team the most time, and you can add more later.
+            We find the tasks your team repeats every week and automate them. Pick what you need. We set up the ones that save the most time, and add more as you go.
           </p>
         </div>
 

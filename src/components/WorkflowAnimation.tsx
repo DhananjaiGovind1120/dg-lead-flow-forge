@@ -21,10 +21,10 @@ const WorkflowAnimation = ({ steps, caption }: WorkflowAnimationProps) => {
       <p className="mb-4 text-center text-xs uppercase tracking-widest text-muted-foreground">{caption}</p>
 
       <svg
-        viewBox={`0 0 440 ${lastY + NODE_R + 20}`}
+        viewBox={`0 0 520 ${lastY + NODE_R + 20}`}
         className="h-auto w-full text-foreground"
         role="img"
-        aria-label="Example flow: an enquiry arrives, gets an instant reply, is booked and reminded, then is invoiced and paid"
+        aria-label={caption}
       >
         <defs>
           <linearGradient id="wf-grad" x1="0" y1="0" x2="1" y2="1">

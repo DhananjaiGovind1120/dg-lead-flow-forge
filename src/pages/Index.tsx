@@ -2,10 +2,12 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
+import Maintenance from "@/components/Maintenance";
+import Pricing from "@/components/Pricing";
 import Trust from "@/components/Trust";
+import DemoScheduler from "@/components/DemoScheduler";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import DemoScheduler from "@/components/DemoScheduler";
 
 const Index = () => {
   return (
@@ -14,6 +16,8 @@ const Index = () => {
       <Hero />
       <Features />
       <HowItWorks />
+      <Maintenance />
+      <Pricing />
       <Trust />
       <DemoScheduler />
       <CTA />

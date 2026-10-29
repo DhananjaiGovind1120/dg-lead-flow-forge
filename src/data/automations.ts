@@ -11,152 +11,152 @@ export interface AutomationCategory {
 
 export const automationCategories: AutomationCategory[] = [
   {
-    id: "enquiries",
-    label: "Enquiries",
+    id: "follow-ups",
+    label: "Follow-ups and chasing",
     automations: [
       {
-        title: "Save every enquiry from your website, Instagram, Facebook, Google and calls into one sheet",
-        example: "A lead from your Instagram page lands in the same sheet as one from a phone call.",
+        title: "Chase unanswered enquiries and quotes at set intervals",
+        example: "A quote goes three days without a reply and gets a polite nudge without anyone remembering to send it.",
       },
       {
-        title: "Send an instant WhatsApp reply to each new enquiry",
-        example: "Someone asks about your opening hours and gets a reply straight away.",
+        title: "Remind customers about upcoming appointments and deadlines",
+        example: "A customer gets a reminder the day before their renewal date is due.",
       },
       {
-        title: "Flag hot leads to the owner the same day",
-        example: "A customer asking for a quote for next week is flagged to you before lunch.",
+        title: "Chase unpaid invoices at set intervals",
+        example: "An invoice still unpaid after a week gets a polite reminder, with the payment link attached.",
       },
       {
-        title: "Follow up with leads who haven't replied after 1, 3 and 7 days",
-        example: "A customer who went quiet after a quote gets a friendly nudge on day 3.",
+        title: "Nudge staff about overdue tasks",
+        example: "A team member gets a reminder that the stock count was due yesterday.",
       },
       {
-        title: "Send the price list or services menu when a customer asks for it",
-        example: "A customer asks what you charge and receives the menu straight away.",
+        title: "Send renewal or repeat-service reminders",
+        example: "A customer who has a service every six weeks gets a reminder when it's due.",
       },
       {
-        title: "Answer common questions (prices, hours, location) on WhatsApp, with a handover to a person",
-        example: "A customer asks where you are, and when they ask something unusual, a person takes over.",
+        title: "Win back customers who've gone quiet",
+        example: "A customer who hasn't visited in 90 days gets a friendly 'we miss you' message.",
       },
     ],
   },
   {
-    id: "bookings",
-    label: "Bookings",
+    id: "data-entry",
+    label: "Data entry and records",
     automations: [
       {
-        title: "Send booking confirmations to customers",
-        example: "A customer books a 4pm slot and gets the date and address in a message.",
+        title: "Save enquiries from your website, social media, forms and calls into one list",
+        example: "A lead from your Instagram page lands in the same list as one from a phone call.",
       },
       {
-        title: "Send reminders 24 hours and 2 hours before each appointment",
-        example: "A customer gets a reminder the day before and another two hours before their visit.",
+        title: "Copy form submissions into the right sheet or CRM automatically",
+        example: "A form filled in on your website appears as a new row in your customer sheet.",
       },
       {
-        title: "Give customers a link to reschedule or cancel",
-        example: "A customer who can't make it moves their appointment without calling you.",
+        title: "Keep the customer list clean: remove duplicates, tag repeat and VIP customers",
+        example: "Two entries for the same customer are merged, and regulars are tagged as VIPs.",
       },
       {
-        title: "Follow up after a missed appointment",
-        example: "A customer who didn't show up gets a message offering a new time.",
+        title: "File invoices, receipts and contracts in the right folder with consistent names",
+        example: "A signed contract is saved as 'ClientName_Contract_2026-10' in the right folder.",
       },
       {
-        title: "Send the owner a morning schedule each day",
-        example: "Every morning you get the day's bookings in one message.",
+        title: "Update price lists across quotes and the website when prices change",
+        example: "A price change is made once and shows up on new quotes and on the website.",
       },
       {
-        title: "Assign tasks to staff with deadlines, and remind them when overdue",
-        example: "A stylist is reminded that the stock check was due yesterday.",
+        title: "Log supplier bills from email attachments into one place",
+        example: "A supplier's invoice sent by email is saved to your bills list with its due date.",
       },
     ],
   },
   {
-    id: "invoices",
-    label: "Invoices and payments",
+    id: "money-admin",
+    label: "Money admin",
     automations: [
       {
         title: "Create and send an invoice when a job is marked done",
         example: "When a job is marked done, the invoice goes to the customer that same day.",
       },
       {
-        title: "Include a payment link on every invoice",
-        example: "The customer pays from their phone with one tap on the invoice link.",
+        title: "Attach a payment link to every invoice",
+        example: "The customer pays from their phone with one tap on the invoice.",
       },
       {
-        title: "Send payment reminders for unpaid invoices on days 3, 7 and 15",
-        example: "An invoice still unpaid after a week gets a polite reminder on day 7.",
-      },
-      {
-        title: "Mark invoices paid and send a thank-you when payment arrives",
+        title: "Mark invoices paid when payment arrives",
         example: "When payment lands, the invoice is marked paid and the customer gets a thank-you.",
       },
       {
-        title: "Capture expense receipts sent as WhatsApp photos into a sheet",
-        example: "A photo of a fuel receipt sent on WhatsApp is saved to your expenses sheet.",
+        title: "Log expense receipts (photo or email) into a sheet by category",
+        example: "A fuel receipt photographed and sent by email is filed under travel.",
       },
       {
-        title: "Send the owner a weekly sales and collections total",
-        example: "Every Monday you see what came in and what is still owed.",
+        title: "Sort bank and UPI transactions into categories for the accountant",
+        example: "Each payment is tagged as rent, supplies or sales, ready for the accountant.",
+      },
+      {
+        title: "Send a weekly sales and collections summary",
+        example: "Every Monday you see what came in last week and what is still owed.",
       },
     ],
   },
   {
-    id: "whatsapp",
-    label: "WhatsApp follow-up",
+    id: "customer-messages",
+    label: "Customer messages",
     automations: [
       {
-        title: "Send a thank-you message after each service or sale",
+        title: "Send booking confirmations",
+        example: "A customer books a 4pm slot and gets the date and address straight away.",
+      },
+      {
+        title: "Send appointment reminders 24 hours and 2 hours before",
+        example: "A customer gets a reminder the day before and another two hours before their visit.",
+      },
+      {
+        title: "Send a thank-you after each service or sale",
         example: "A customer gets a thank-you message after leaving the clinic.",
       },
       {
-        title: "Send a review request two days after a visit",
+        title: "Ask for a review two days after a visit",
         example: "Two days after a visit, the customer gets a short link to leave a review.",
       },
       {
-        title: "Send repeat-service reminders",
-        example: "A customer who has a facial every six weeks gets a reminder when it's due.",
+        title: "Answer routine questions (prices, hours, location) with the right information",
+        example: "A customer asks for your opening hours and gets the answer straight away.",
       },
       {
-        title: "Send birthday or festival greetings to customers who opted in",
-        example: "Customers who said yes get a birthday message with a small offer.",
-      },
-      {
-        title: "Send a win-back message to customers who haven't visited in 90 days",
-        example: "A customer who hasn't been in since the summer gets a 'we miss you' message.",
-      },
-      {
-        title: "Send customers a short feedback question after each visit, and alert the owner to complaints the same day",
+        title: "Send a feedback question after each visit, and flag complaints to the owner the same day",
         example: "A customer who rates the visit two out of five is flagged to you immediately.",
       },
     ],
   },
   {
-    id: "admin",
-    label: "Admin and compliance",
+    id: "reporting",
+    label: "Reporting, stock and deadlines",
     automations: [
       {
-        title: "Alert the owner when stock falls below a set level",
+        title: "Send the owner a morning schedule",
+        example: "Every morning you get the day's bookings and tasks in one message.",
+      },
+      {
+        title: "Send the owner a daily or weekly summary",
+        example: "Each week you get a short summary of sales, bookings and open invoices.",
+      },
+      {
+        title: "Alert when stock falls below a set level",
         example: "When hair dye drops below five bottles, you get an alert.",
       },
       {
-        title: "Send a reorder reminder to suppliers when stock is low",
-        example: "The supplier gets a reorder message as soon as stock reaches the set level.",
+        title: "Draft a reorder to the supplier when stock is low",
+        example: "A reorder to your supplier is drafted as soon as stock hits the set level, ready for you to send.",
       },
       {
-        title: "Remind staff about shift starts and missing documents",
-        example: "A staff member gets a reminder that their ID is still missing from the file.",
-      },
-      {
-        title: "Send deadline reminders for GST, TDS, licences and renewals",
+        title: "Remind the owner of GST, TDS, licence and renewal deadlines",
         example: "You get a reminder a week before the GST return is due.",
       },
       {
-        title: "Track key documents (licences, insurance, contracts) and warn before they expire",
+        title: "Track document expiry (licences, insurance, contracts) and warn in advance",
         example: "You're warned 30 days before the insurance certificate expires.",
-      },
-      {
-        title: "Email a monthly summary report to the owner on the 1st",
-        example: "On the 1st of each month, your summary arrives in your inbox.",
       },
     ],
   },

@@ -1,13 +1,12 @@
 import { ChevronRight, Clock, MessageCircle, User, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import WorkflowAnimation from "./WorkflowAnimation";
-import { whatsappLink } from "@/lib/site";
 
-const workflowSteps = [
-  { title: "Enquiry comes in", detail: "From your website, Instagram or calls" },
-  { title: "Instant WhatsApp reply", detail: "The customer hears back straight away" },
-  { title: "Booking confirmed and reminded", detail: "Reminders go out before the appointment" },
-  { title: "Invoice sent and paid", detail: "Payment link sent the same day" },
+const repeatedTaskSteps = [
+  { title: "Quote goes unanswered", detail: "No one remembers to chase it" },
+  { title: "Gentle reminder sent after 3 days", detail: "Sent automatically, with the quote attached" },
+  { title: "Customer replies, owner is alerted", detail: "Replies are passed on to you" },
+  { title: "Quote marked accepted and invoice sent", detail: "The invoice goes out the same day" },
 ];
 
 const stats = [
@@ -24,29 +23,25 @@ const Hero = () => {
           <div className="w-full lg:w-1/2">
             <div className="inline-flex items-center px-3 py-1 mb-6 text-sm font-medium rounded-full bg-brand-100 text-brand-700">
               <MessageCircle size={16} className="mr-2" />
-              Done-for-you back-office for small businesses
+              Done-for-you task automation for small businesses
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-              Your back-office,
-              <span className="gradient-text"> run on WhatsApp.</span>
+              The tedious work your team repeats every week,
+              <span className="gradient-text"> automated and maintained for you.</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              We set up enquiries, bookings, invoices and follow-ups for your small business in about three weeks, then keep them running. When something needs changing, you call a real person.
+              Follow-ups, reminders, data entry, invoices and updates. We set them up, run them, and keep them working as your business changes. When something needs fixing, you call a real person.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Button size="lg" className="bg-gradient hover:opacity-90" asChild>
                 <a href="#schedule-demo">
-                  Book a free 30-minute call
+                  Tell us what you do by hand
                   <ChevronRight size={18} className="ml-1" />
                 </a>
               </Button>
-              {whatsappLink && (
-                <Button size="lg" variant="outline" asChild>
-                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                    Message us on WhatsApp
-                  </a>
-                </Button>
-              )}
+              <Button size="lg" variant="outline" asChild>
+                <a href="#schedule-demo">Book a free 30-minute call</a>
+              </Button>
             </div>
             <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
               {stats.map((stat) => (
@@ -62,7 +57,7 @@ const Hero = () => {
             <div className="absolute -top-10 -right-10 w-64 h-64 bg-brand-400/20 rounded-full filter blur-3xl"></div>
             <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-dgblue-400/20 rounded-full filter blur-3xl"></div>
             <div className="relative">
-              <WorkflowAnimation steps={workflowSteps} caption="How a customer enquiry flows through" />
+              <WorkflowAnimation steps={repeatedTaskSteps} caption="How one repetitive task gets handled" />
             </div>
           </div>
         </div>
