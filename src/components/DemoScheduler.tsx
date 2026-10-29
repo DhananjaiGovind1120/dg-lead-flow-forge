@@ -9,26 +9,24 @@ import { scheduleDemo } from "@/lib/api";
 import { useToast } from "@/components/ui/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-interface DemoSchedulerProps {
-  workflow?: string;
-  // Inside a dialog the dialog supplies the title and spacing
-  embedded?: boolean;
-}
+const businessTypes = ["Shop", "Clinic", "Salon", "Coaching centre", "Service firm", "Distributor", "Other"];
 
-const DemoScheduler = ({ workflow, embedded = false }: DemoSchedulerProps) => {
+const emptyForm = {
+  name: "",
+  businessName: "",
+  phone: "",
+  businessType: "",
+  timeDrain: "",
+};
+
+const DemoScheduler = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedTime, setSelectedTime] = useState<string>("10:00");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    phone: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState(emptyForm);
 
-  // Generate available time slots (9 AM to 5 PM)
+  // Generate available time slots (9 AM to 5 PM, every 30 minutes)
   const timeSlots = Array.from({ length: 17 }, (_, i) => {
     const hour = Math.floor(i / 2) + 9;
     const minute = i % 2 === 0 ? "00" : "30";
@@ -40,7 +38,15 @@ const DemoScheduler = ({ workflow, embedded = false }: DemoSchedulerProps) => {
     if (!date) {
       toast({
         title: "Error",
-        description: "Please select a date for the demo",
+        description: "Please select a date for the call",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!formData.businessType) {
+      toast({
+        title: "Error",
+        description: "Please choose your business type",
         variant: "destructive",
       });
       return;
@@ -53,25 +59,25 @@ const DemoScheduler = ({ workflow, embedded = false }: DemoSchedulerProps) => {
 
     setIsLoading(true);
     try {
-      await scheduleDemo({ ...formData, date: scheduledDate, workflow });
+      await scheduleDemo({
+        name: formData.name,
+        business_name: formData.businessName,
+        phone: formData.phone,
+        business_type: formData.businessType,
+        time_drain: formData.timeDrain,
+        date: scheduledDate,
+      });
       toast({
-        title: "Success",
-        description: "Your demo has been scheduled successfully!",
+        title: "Booked",
+        description: "Your 30-minute call is booked. We'll be in touch on WhatsApp.",
       });
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        phone: "",
-        message: "",
-      });
+      setFormData(emptyForm);
       setDate(new Date());
       setSelectedTime("10:00");
     } catch (error) {
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to schedule demo",
+        description: error instanceof Error ? error.message : "Failed to book your call",
         variant: "destructive",
       });
     } finally {
@@ -79,28 +85,15 @@ const DemoScheduler = ({ workflow, embedded = false }: DemoSchedulerProps) => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
   return (
-    <section id="schedule-demo" className={embedded ? "" : "py-20 bg-slate-50"}>
-      <div className={embedded ? "" : "container px-4 mx-auto"}>
-        {!embedded && (
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Schedule a Demo</h2>
-            <p className="text-slate-600">
-              Book a personalized demo to see how our solutions can transform your business.
-            </p>
-          </div>
-        )}
-
-        {workflow && (
-          <p className="mb-6 text-center text-sm text-muted-foreground">
-            Booking for: <span className="font-medium text-foreground">{workflow}</span>
+    <section id="schedule-demo" className="py-20 bg-slate-50">
+      <div className="container px-4 mx-auto">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Book a free 30-minute call</h2>
+          <p className="text-slate-600">
+            Tell us a little about your business and pick a time. We'll talk through what takes up your team's time.
           </p>
-        )}
+        </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Calendar Section */}
@@ -116,11 +109,7 @@ const DemoScheduler = ({ workflow, embedded = false }: DemoSchedulerProps) => {
             />
             <div className="mt-4 space-y-2">
               <Label htmlFor="time">Select Time</Label>
-              <Select
-                value={selectedTime}
-                onValueChange={setSelectedTime}
-                disabled={isLoading}
-              >
+              <Select value={selectedTime} onValueChange={setSelectedTime} disabled={isLoading}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a time" />
                 </SelectTrigger>
@@ -144,73 +133,72 @@ const DemoScheduler = ({ workflow, embedded = false }: DemoSchedulerProps) => {
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name">Name</Label>
                 <Input
                   id="name"
-                  name="name"
                   value={formData.name}
-                  onChange={handleInputChange}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                   required
                   disabled={isLoading}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="businessName">Business name</Label>
                 <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
+                  id="businessName"
+                  value={formData.businessName}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, businessName: e.target.value }))}
                   required
                   disabled={isLoading}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="company">Company</Label>
-                <Input
-                  id="company"
-                  name="company"
-                  value={formData.company}
-                  onChange={handleInputChange}
-                  required
-                  disabled={isLoading}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone Number</Label>
+                <Label htmlFor="phone">Phone (WhatsApp)</Label>
                 <Input
                   id="phone"
-                  name="phone"
                   type="tel"
                   value={formData.phone}
-                  onChange={handleInputChange}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
                   required
                   disabled={isLoading}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="message">Additional Notes</Label>
+                <Label htmlFor="businessType">Business type</Label>
+                <Select
+                  value={formData.businessType}
+                  onValueChange={(value) => setFormData((prev) => ({ ...prev, businessType: value }))}
+                  disabled={isLoading}
+                >
+                  <SelectTrigger id="businessType" className="w-full">
+                    <SelectValue placeholder="Choose one" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {businessTypes.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {type}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="timeDrain">What takes up most of your time?</Label>
                 <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
+                  id="timeDrain"
+                  value={formData.timeDrain}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, timeDrain: e.target.value }))}
                   rows={4}
                   disabled={isLoading}
                 />
               </div>
 
-              <Button 
-                type="submit" 
-                className="w-full bg-gradient hover:opacity-90"
-                disabled={isLoading}
-              >
-                {isLoading ? "Scheduling..." : "Schedule Demo"}
+              <Button type="submit" className="w-full bg-gradient hover:opacity-90" disabled={isLoading}>
+                {isLoading ? "Booking..." : "Book my call"}
               </Button>
             </form>
           </div>
@@ -220,4 +208,4 @@ const DemoScheduler = ({ workflow, embedded = false }: DemoSchedulerProps) => {
   );
 };
 
-export default DemoScheduler; 
+export default DemoScheduler;

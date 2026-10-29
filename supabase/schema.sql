@@ -1,4 +1,4 @@
--- Run this in the Supabase SQL editor for the new project.
+-- Run this in the Supabase SQL editor for a new project.
 
 create table if not exists public.leads (
   id uuid primary key default gen_random_uuid(),
@@ -10,11 +10,10 @@ create table if not exists public.leads (
 create table if not exists public.demos (
   id uuid primary key default gen_random_uuid(),
   name text not null,
-  email text not null,
-  company text not null,
+  business_name text not null,
   phone text not null,
-  message text,
-  workflow text,
+  business_type text not null,
+  time_drain text,
   meeting_at timestamptz not null,
   status text not null default 'pending'
     check (status in ('pending', 'confirmed', 'cancelled')),

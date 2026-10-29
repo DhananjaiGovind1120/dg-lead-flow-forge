@@ -1,7 +1,12 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+
+const navLinks = [
+  { href: "#what-we-set-up", label: "What we set up" },
+  { href: "#how-it-works", label: "How it works" },
+  { href: "#pricing", label: "Pricing" },
+];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,15 +25,14 @@ const Navbar = () => {
         {/* Desktop navigation */}
         <div className="hidden md:flex items-center gap-8">
           <div className="flex gap-6">
-            <a href="#features" className="font-medium hover:text-brand-600 transition-colors">
-              Solutions
-            </a>
-            <a href="#how-it-works" className="font-medium hover:text-brand-600 transition-colors">
-              How It Works
-            </a>
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="font-medium hover:text-brand-600 transition-colors">
+                {link.label}
+              </a>
+            ))}
           </div>
-          <Button variant="default" className="bg-gradient hover:opacity-90">
-            Get Started
+          <Button variant="default" className="bg-gradient hover:opacity-90" asChild>
+            <a href="#schedule-demo">Book a call</a>
           </Button>
         </div>
 
@@ -44,23 +48,19 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="fixed inset-0 top-16 z-50 bg-background p-4 md:hidden">
           <div className="flex flex-col gap-4 pt-8 text-center">
-            <a 
-              href="#features" 
-              className="text-lg py-3 font-medium hover:text-brand-600 transition-colors"
-              onClick={toggleMenu}
-            >
-              Solutions
-            </a>
-            <a 
-              href="#how-it-works" 
-              className="text-lg py-3 font-medium hover:text-brand-600 transition-colors"
-              onClick={toggleMenu}
-            >
-              How It Works
-            </a>
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-lg py-3 font-medium hover:text-brand-600 transition-colors"
+                onClick={toggleMenu}
+              >
+                {link.label}
+              </a>
+            ))}
             <div className="pt-4">
-              <Button variant="default" className="w-full bg-gradient hover:opacity-90">
-                Get Started
+              <Button variant="default" className="w-full bg-gradient hover:opacity-90" asChild>
+                <a href="#schedule-demo" onClick={toggleMenu}>Book a call</a>
               </Button>
             </div>
           </div>

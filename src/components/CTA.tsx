@@ -43,7 +43,7 @@ const CTA = () => {
                 Ready to Transform Your Sales Pipeline?
               </h2>
               <p className="text-lg text-white/90 max-w-2xl mx-auto">
-                Get started with our AI-powered lead generation solutions today and see the difference in your conversion rates.
+                Get started with a back-office set up for your business in about three weeks, with a real person to call.
               </p>
             </div>
             

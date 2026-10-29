@@ -1,47 +1,30 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  ClipboardCheck,
-  Search,
-  Code,
-  Bot,
-  Workflow,
-  LineChart
-} from "lucide-react";
+import { Code, Rocket, Search } from "lucide-react";
 
 const steps = [
   {
-    icon: <ClipboardCheck className="h-8 w-8" />,
-    title: "Process Analysis",
-    description: "We analyze your current workflows to identify bottlenecks, inefficiencies, and tasks that can be automated with AI."
-  },
-  {
     icon: <Search className="h-8 w-8" />,
-    title: "Solution Design",
-    description: "Our experts design custom AI solutions tailored to your specific business needs and integration requirements."
+    week: "Week 1",
+    title: "Map your workflow",
+    description: "We learn how enquiries, bookings and invoices flow through your business today.",
   },
   {
     icon: <Code className="h-8 w-8" />,
-    title: "Implementation",
-    description: "We seamlessly integrate our AI tools with your existing systems while ensuring minimal disruption to operations."
+    week: "Week 2",
+    title: "Build and test",
+    description: "We set up the messages, bookings and invoices, then test every step with you.",
   },
   {
-    icon: <Bot className="h-8 w-8" />,
-    title: "AI Training",
-    description: "Your AI systems are trained using your business data to ensure they deliver relevant and accurate results."
+    icon: <Rocket className="h-8 w-8" />,
+    week: "Week 3",
+    title: "Go live, train your team",
+    description: "We switch everything on, train your team, and stay on call while you settle in.",
   },
-  {
-    icon: <Workflow className="h-8 w-8" />,
-    title: "Deployment & Adoption",
-    description: "We help your team transition to the new automated workflows with comprehensive training and support."
-  },
-  {
-    icon: <LineChart className="h-8 w-8" />,
-    title: "Continuous Improvement",
-    description: "Our AI systems constantly learn and improve based on feedback and changing business requirements."
-  }
 ];
 
-const StepItem = ({ step, index }: { step: (typeof steps)[number]; index: number }) => {
+type Step = (typeof steps)[number];
+
+const StepItem = ({ step, index }: { step: Step; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -68,17 +51,15 @@ const StepItem = ({ step, index }: { step: (typeof steps)[number]; index: number
       className={`flex flex-col items-center text-center transition-all duration-700 ease-out motion-reduce:transition-none ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8 motion-reduce:opacity-100 motion-reduce:translate-y-0"
       }`}
-      style={{ transitionDelay: `${(index % 3) * 150}ms` }}
+      style={{ transitionDelay: `${index * 150}ms` }}
     >
       <div className="relative mb-6 flex h-20 w-20 items-center justify-center">
         <span className="absolute inset-0 rounded-full bg-gradient motion-safe:animate-pulse-ring" />
         <span className="relative flex h-20 w-20 items-center justify-center rounded-full bg-gradient text-white shadow-lg">
           {step.icon}
         </span>
-        <span className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-background text-xs font-bold text-brand-600 shadow ring-1 ring-brand-200">
-          {index + 1}
-        </span>
       </div>
+      <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-brand-600">{step.week}</p>
       <h3 className="mb-2 text-xl font-semibold">{step.title}</h3>
       <p className="max-w-sm text-muted-foreground">{step.description}</p>
     </div>
@@ -91,18 +72,19 @@ const HowItWorks = () => {
       <div className="container px-4 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            How Our <span className="gradient-text">AI Technology</span> Works
+            Up and running in <span className="gradient-text">three weeks</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Our proven methodology ensures successful implementation of AI automation across your organization.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center">
           {steps.map((step, index) => (
             <StepItem key={step.title} step={step} index={index} />
           ))}
         </div>
+
+        <p className="mt-16 text-center text-lg text-muted-foreground">
+          Every month we review what's working and adjust it.
+        </p>
       </div>
     </section>
   );

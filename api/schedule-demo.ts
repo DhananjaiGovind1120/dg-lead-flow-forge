@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { supabase } from './_lib/supabase.js';
 
-const requiredFields = ['name', 'email', 'company', 'phone', 'date'];
+const requiredFields = ['name', 'business_name', 'phone', 'business_type', 'date'];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -20,11 +20,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .from('demos')
       .insert({
         name: demoData.name,
-        email: demoData.email,
-        company: demoData.company,
+        business_name: demoData.business_name,
         phone: demoData.phone,
-        message: demoData.message || null,
-        workflow: demoData.workflow || null,
+        business_type: demoData.business_type,
+        time_drain: demoData.time_drain || null,
         meeting_at: new Date(demoData.date).toISOString(),
         status: 'pending',
       })

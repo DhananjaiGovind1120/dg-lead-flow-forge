@@ -43,11 +43,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-5">Solutions</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors">AI Lead Scoring</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors">Customer Profiling</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors">Lead Generation</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors">Sales Automation</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors">Analytics Dashboard</a></li>
+              <li><a href="#what-we-set-up" className="text-slate-400 hover:text-white transition-colors">Enquiries</a></li>
+              <li><a href="#what-we-set-up" className="text-slate-400 hover:text-white transition-colors">Bookings</a></li>
+              <li><a href="#what-we-set-up" className="text-slate-400 hover:text-white transition-colors">Invoices and payments</a></li>
+              <li><a href="#what-we-set-up" className="text-slate-400 hover:text-white transition-colors">WhatsApp follow-up</a></li>
+              <li><a href="#what-we-set-up" className="text-slate-400 hover:text-white transition-colors">Admin and compliance</a></li>
             </ul>
           </div>
           
