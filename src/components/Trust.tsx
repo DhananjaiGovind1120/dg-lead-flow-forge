@@ -1,4 +1,4 @@
-import { whatsappLink, WHATSAPP_NUMBER } from "@/lib/site";
+import { whatsappLink, WHATSAPP_DISPLAY } from "@/lib/site";
 
 const Trust = () => {
   return (
@@ -9,20 +9,22 @@ const Trust = () => {
         </p>
 
         <div className="max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-8 text-center sm:text-left">
-          <div className="flex h-32 w-32 shrink-0 items-center justify-center rounded-full bg-brand-100 text-sm text-brand-700">
-            [Founder photo]
-          </div>
+          <img
+            src="/founder.jpg"
+            alt="Dhananjai Govind, founder of Grace automations"
+            className="h-32 w-32 shrink-0 rounded-full object-cover object-top shadow-md"
+          />
           <div>
-            <h2 className="text-2xl font-display font-bold mb-1">[Founder name]</h2>
+            <h2 className="text-2xl font-display font-bold mb-1">Dhananjai Govind</h2>
             <p className="text-muted-foreground mb-4">Founder, Grace automations</p>
             <p className="text-muted-foreground">
               WhatsApp:{" "}
-              {WHATSAPP_NUMBER && whatsappLink ? (
+              {whatsappLink ? (
                 <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="font-medium text-foreground hover:text-brand-600">
-                  +{WHATSAPP_NUMBER}
+                  {WHATSAPP_DISPLAY}
                 </a>
               ) : (
-                <span className="font-medium text-foreground">[WhatsApp number]</span>
+                <span className="font-medium text-foreground">{WHATSAPP_DISPLAY}</span>
               )}
             </p>
             <p className="mt-4 text-muted-foreground">Based in London, working with businesses across India.</p>
