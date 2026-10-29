@@ -13,6 +13,7 @@ const businessTypes = ["Shop", "Clinic", "Salon", "Coaching centre", "Service fi
 
 const emptyForm = {
   name: "",
+  email: "",
   businessName: "",
   phone: "",
   businessType: "",
@@ -61,6 +62,7 @@ const DemoScheduler = () => {
     try {
       await scheduleDemo({
         name: formData.name,
+        email: formData.email,
         business_name: formData.businessName,
         phone: formData.phone,
         business_type: formData.businessType,
@@ -138,6 +140,18 @@ const DemoScheduler = () => {
                   id="name"
                   value={formData.name}
                   onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+                  required
+                  disabled={isLoading}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                   required
                   disabled={isLoading}
                 />

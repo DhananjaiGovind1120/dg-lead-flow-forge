@@ -10,6 +10,7 @@ create table if not exists public.leads (
 create table if not exists public.demos (
   id uuid primary key default gen_random_uuid(),
   name text not null,
+  email text not null,
   business_name text not null,
   phone text not null,
   business_type text not null,

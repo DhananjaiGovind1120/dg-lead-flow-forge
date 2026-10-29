@@ -5,6 +5,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL ?? '';
 
 export interface DemoRequest {
   name: string;
+  email: string;
   business_name: string;
   phone: string;
   business_type: string;
