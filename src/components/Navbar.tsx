@@ -26,9 +26,6 @@ const Navbar = () => {
             <a href="#how-it-works" className="font-medium hover:text-brand-600 transition-colors">
               How It Works
             </a>
-            <a href="#testimonials" className="font-medium hover:text-brand-600 transition-colors">
-              Testimonials
-            </a>
           </div>
           <Button variant="default" className="bg-gradient hover:opacity-90">
             Get Started
@@ -60,13 +57,6 @@ const Navbar = () => {
               onClick={toggleMenu}
             >
               How It Works
-            </a>
-            <a 
-              href="#testimonials" 
-              className="text-lg py-3 font-medium hover:text-brand-600 transition-colors"
-              onClick={toggleMenu}
-            >
-              Testimonials
             </a>
             <div className="pt-4">
               <Button variant="default" className="w-full bg-gradient hover:opacity-90">
