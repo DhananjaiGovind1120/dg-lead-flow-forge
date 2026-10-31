@@ -1,4 +1,4 @@
-import { ChevronRight, Clock, MessageCircle, User, Users } from "lucide-react";
+import { ChevronRight, Clock, User, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import WorkflowAnimation from "./WorkflowAnimation";
 
@@ -11,7 +11,7 @@ const repeatedTaskSteps = [
 
 const stats = [
   { icon: Clock, label: "Live in about 3 weeks" },
-  { icon: Users, label: "Built for businesses of 1 to 50 people" },
+  { icon: Users, label: "Built around how your team actually works" },
   { icon: User, label: "A named person, not a ticket queue" },
 ];
 
@@ -21,10 +21,6 @@ const Hero = () => {
       <div className="container px-4 mx-auto">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           <div className="w-full lg:w-1/2">
-            <div className="inline-flex items-center px-3 py-1 mb-6 text-sm font-medium rounded-full bg-brand-500/15 text-brand-300">
-              <MessageCircle size={16} className="mr-2" />
-              Done-for-you task automation for small businesses
-            </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
               The tedious work your team repeats every week,
               <span className="gradient-text"> automated and maintained for you.</span>
