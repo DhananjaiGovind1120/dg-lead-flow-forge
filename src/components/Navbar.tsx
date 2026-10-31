@@ -5,7 +5,6 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { href: "#what-we-set-up", label: "What we take off your plate" },
   { href: "#how-it-works", label: "How it works" },
-  { href: "#pricing", label: "Pricing" },
 ];
 
 const Navbar = () => {
