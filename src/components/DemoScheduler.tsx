@@ -88,18 +88,18 @@ const DemoScheduler = () => {
   };
 
   return (
-    <section id="schedule-demo" className="py-20 bg-slate-50">
+    <section id="schedule-demo" className="py-20 bg-card/40">
       <div className="container px-4 mx-auto">
         <div className="max-w-4xl mx-auto text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Book a free 30-minute call</h2>
-          <p className="text-slate-600">
+          <p className="text-muted-foreground">
             Tell us a little about your business and pick a time. We'll talk through what takes up your team's time.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Calendar Section */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
+          <div className="bg-card p-6 rounded-lg shadow-sm">
             <h3 className="text-xl font-semibold mb-4">Select Date & Time</h3>
             <Calendar
               mode="single"
@@ -125,14 +125,14 @@ const DemoScheduler = () => {
               </Select>
             </div>
             {date && (
-              <p className="mt-4 text-sm text-slate-600">
+              <p className="mt-4 text-sm text-muted-foreground">
                 Selected: {format(date, "PPP")} at {selectedTime}
               </p>
             )}
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
+          <div className="bg-card p-6 rounded-lg shadow-sm">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>

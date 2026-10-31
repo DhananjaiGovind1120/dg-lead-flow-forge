@@ -8,7 +8,7 @@ const letters = [
 
 const GraceName = () => {
   return (
-    <section id="about-the-name" className="py-20 bg-slate-50 dark:bg-slate-900/50">
+    <section id="about-the-name" className="py-20 bg-card/40">
       <div className="container px-4 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">

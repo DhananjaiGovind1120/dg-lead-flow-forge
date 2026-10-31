@@ -2,7 +2,7 @@ import { whatsappLink, WHATSAPP_DISPLAY } from "@/lib/site";
 
 const Trust = () => {
   return (
-    <section className="py-20 border-t border-slate-200 dark:border-slate-800">
+    <section className="py-20 border-t border-border">
       <div className="container px-4 mx-auto">
         <p className="text-center text-lg text-muted-foreground mb-16">
           Shops, clinics, salons, coaching centres, service firms and distributors with 1 to 50 people.
@@ -20,7 +20,7 @@ const Trust = () => {
             <p className="text-muted-foreground">
               WhatsApp:{" "}
               {whatsappLink ? (
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="font-medium text-foreground hover:text-brand-600">
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="font-medium text-foreground hover:text-brand-400">
                   {WHATSAPP_DISPLAY}
                 </a>
               ) : (

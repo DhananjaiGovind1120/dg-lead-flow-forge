@@ -21,7 +21,7 @@ const Hero = () => {
       <div className="container px-4 mx-auto">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           <div className="w-full lg:w-1/2">
-            <div className="inline-flex items-center px-3 py-1 mb-6 text-sm font-medium rounded-full bg-brand-100 text-brand-700">
+            <div className="inline-flex items-center px-3 py-1 mb-6 text-sm font-medium rounded-full bg-brand-500/15 text-brand-300">
               <MessageCircle size={16} className="mr-2" />
               Done-for-you task automation for small businesses
             </div>
@@ -46,7 +46,7 @@ const Hero = () => {
             <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
               {stats.map((stat) => (
                 <li key={stat.label} className="flex items-center">
-                  <stat.icon size={18} className="mr-2 shrink-0 text-dgblue-600" />
+                  <stat.icon size={18} className="mr-2 shrink-0 text-dgblue-400" />
                   <span>{stat.label}</span>
                 </li>
               ))}

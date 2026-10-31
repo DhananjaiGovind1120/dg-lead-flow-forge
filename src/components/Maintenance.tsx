@@ -7,7 +7,7 @@ const points = [
 
 const Maintenance = () => {
   return (
-    <section className="py-20 border-t border-slate-200 dark:border-slate-800">
+    <section className="py-20 border-t border-border">
       <div className="container px-4 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">

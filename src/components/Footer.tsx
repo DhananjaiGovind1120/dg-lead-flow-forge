@@ -13,12 +13,12 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-slate-900 text-white">
+    <footer className="bg-card text-white">
       <div className="container px-4 mx-auto py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <div className="text-2xl font-display font-bold mb-5">
-              <span className="text-dgblue-500">Grace</span>
+              <span className="text-dgblue-400">Grace</span>
               <span className="text-brand-400"> automations</span>
             </div>
             <p className="text-slate-400 mb-6">
@@ -87,7 +87,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-slate-800 mt-12 pt-8">
+        <div className="border-t border-border mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-slate-400 text-sm">
               &copy; {currentYear} Grace automations. All rights reserved.

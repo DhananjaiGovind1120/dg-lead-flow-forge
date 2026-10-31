@@ -59,7 +59,7 @@ const StepItem = ({ step, index }: { step: Step; index: number }) => {
           {step.icon}
         </span>
       </div>
-      <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-brand-600">{step.week}</p>
+      <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-brand-400">{step.week}</p>
       <h3 className="mb-2 text-xl font-semibold">{step.title}</h3>
       <p className="max-w-sm text-muted-foreground">{step.description}</p>
     </div>

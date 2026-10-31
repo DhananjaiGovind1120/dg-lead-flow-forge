@@ -18,14 +18,14 @@ const Navbar = () => {
     <nav className="py-4 md:py-6 fixed w-full top-0 z-50 bg-background/80 backdrop-blur-md">
       <div className="container px-4 mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <a href="#" className="text-xl sm:text-2xl font-display font-bold whitespace-nowrap"><span className="text-dgblue-600">Grace</span><span className="text-brand-600"> automations</span></a>
+          <a href="#" className="text-xl sm:text-2xl font-display font-bold whitespace-nowrap"><span className="text-dgblue-400">Grace</span><span className="text-brand-400"> automations</span></a>
         </div>
 
         {/* Desktop navigation */}
         <div className="hidden md:flex items-center gap-8">
           <div className="flex gap-6">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="font-medium hover:text-brand-600 transition-colors">
+              <a key={link.href} href={link.href} className="font-medium hover:text-brand-400 transition-colors">
                 {link.label}
               </a>
             ))}
@@ -51,7 +51,7 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-lg py-3 font-medium hover:text-brand-600 transition-colors"
+                className="text-lg py-3 font-medium hover:text-brand-400 transition-colors"
                 onClick={toggleMenu}
               >
                 {link.label}

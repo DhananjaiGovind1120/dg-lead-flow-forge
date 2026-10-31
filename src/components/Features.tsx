@@ -4,7 +4,7 @@ import { automationCategories } from "@/data/automations";
 
 const Features = () => {
   return (
-    <section id="what-we-set-up" className="py-20 bg-slate-50 dark:bg-slate-900/50">
+    <section id="what-we-set-up" className="py-20 bg-card/40">
       <div className="container px-4 mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
@@ -34,7 +34,7 @@ const Features = () => {
                 {category.automations.map((automation) => (
                   <div
                     key={automation.title}
-                    className="bg-white dark:bg-slate-800 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow"
+                    className="bg-card rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow"
                   >
                     <h3 className="text-base font-semibold mb-3">{automation.title}</h3>
                     <p className="text-sm text-muted-foreground">{automation.example}</p>
