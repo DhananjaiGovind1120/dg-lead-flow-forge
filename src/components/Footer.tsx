@@ -22,6 +22,8 @@ const Footer = () => {
               <span className="text-brand-400"> automations</span>
             </div>
             <p className="text-slate-400 mb-6">
+              Growing Results with Automation, Care and Ease.
+              <br />
               Based in London, working with businesses across India.
             </p>
             <div className="flex gap-4">
