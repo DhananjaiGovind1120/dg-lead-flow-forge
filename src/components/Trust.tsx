@@ -4,9 +4,6 @@ const Trust = () => {
   return (
     <section className="py-20 border-t border-border">
       <div className="container px-4 mx-auto">
-        <p className="text-center text-lg text-muted-foreground mb-16">
-          Shops, clinics, salons, coaching centres, service firms and distributors with 1 to 50 people.
-        </p>
 
         <div className="max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-8 text-center sm:text-left">
           <img
