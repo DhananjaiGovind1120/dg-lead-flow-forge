@@ -10,7 +10,7 @@ const repeatedTaskSteps = [
 ];
 
 const stats = [
-  { icon: Clock, label: "Live in about 3 weeks" },
+  { icon: Clock, label: "Live in 3 weeks" },
   { icon: Users, label: "Built around how your team actually works" },
   { icon: User, label: "A named person, not a ticket queue" },
 ];
