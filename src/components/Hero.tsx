@@ -31,12 +31,12 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Button size="lg" className="bg-gradient hover:opacity-90" asChild>
                 <a href="#schedule-demo">
-                  Tell us what you do by hand
+                  Book a free 30-minute call
                   <ChevronRight size={18} className="ml-1" />
                 </a>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <a href="#schedule-demo">Book a free 30-minute call</a>
+                <a href="#what-we-set-up">See what we take off your plate</a>
               </Button>
             </div>
             <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
